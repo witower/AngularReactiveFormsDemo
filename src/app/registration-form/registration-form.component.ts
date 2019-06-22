@@ -6,7 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  //styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class RegistrationFormComponent implements OnInit {
     email: ['', [Validators.required, , Validators.email]],
     phone: ['', [Validators.pattern('^[0-9 ()+-]*$')]],
     passwordGroup: this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(8)]], //, Validators.pattern('^(?=.*?[A-Z])(?=.*?[@#$%^&]).{8,}$')
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*?[A-Z])(?=.*?[@#$%^&]).{8,}$')]],
       passwordConfirm: [{value: '', disabled: true}, Validators.required]
     }, {validators: passwordNotMatchValidator}),
     pet: ['', Validators.required],
