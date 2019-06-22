@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+/* div > label, div >input {
+    display: block;
+}
+
+form div {
+    padding: 0.3em;
+} */
+
+/* label span {
+    display: block;
+}
+
+input:required {
+    color: violet;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin: 0 0.3em;
+} */

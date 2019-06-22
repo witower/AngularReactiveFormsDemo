@@ -1,0 +1,216 @@
+<div class="container-fluid">
+<h1>Registration form</h1>
+<p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <section>
+    <h2>Basic information</h2>
+
+    <div class="form-group">
+
+      <label>Name: <strong><abbr title="required">*</abbr></strong>
+        <input class="form-control" type="text" formControlName="name" required/>
+      </label>
+      
+      <div *ngIf="deserveError('name')" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          Name is required.
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Surname: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="text" formControlName="surname" required/>
+      </label>
+
+      <div *ngIf="deserveError('surname')" class="alert alert-danger">
+        <div *ngIf="surname.errors.required">
+          Surame is required.
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Email: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="email" formControlName="email" required/>
+      </label>
+      
+      <div *ngIf="deserveError('email')" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors.email">
+          Please provide a valid email address, like email@example.com .
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Phone: </span>
+        <input class="form-control" type="text" formControlName="phone"/>
+      </label>
+
+      <div *ngIf="deserveError('phone')" class="alert alert-danger">
+        <div *ngIf="phone.errors.pattern">
+          Please provide a phone number containing only digits, spaces and symbols from "+ ( ) -"
+        </div>
+      </div>
+      
+    </div>
+    <div formGroupName="passwordGroup">
+
+    <div class="form-group">
+
+      <label>
+        <span>Password: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="password" formControlName="password" required/>
+      </label>
+
+      <div *ngIf="deserveError('passwordGroup.password')" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="password.errors.minlength || password.errors.pattern">
+            Please provide a password with at least: 8 characters totally, one capital letter and one symbol from "@ # $ % ^ &"
+        </div>
+       </div>
+
+    </div>
+    <div class="form-group">
+        <label>
+          <span>Repeat password: <strong><abbr title="required">*</abbr></strong></span>
+          <input class="form-control" type="password" formControlName="passwordConfirm" required/>
+        </label>
+
+        <div *ngIf="deserveError('passwordGroup.passwordConfirm')" class="alert alert-danger">
+          <div *ngIf="passwordConfirm.errors.required">
+              Password repetition is required.
+          </div>
+       </div>
+
+    </div>
+
+    <div *ngIf="passwordNotMatch" class="alert alert-danger">
+      <div *ngIf="passwordGroup.errors.passwordNotMatch">
+        Passwords not match.
+      </div>
+     </div>
+
+    </div>
+    <div class="form-group">
+
+      <div>
+       <label>Pet: <strong><abbr title="required">*</abbr></strong></label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="dogRadio" formControlName="pet" value="dog">
+        <label class="form-check-label" for="dogRadio">Dog</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="catRadio" formControlName="pet" value="cat">
+        <label class="form-check-label" for="catRadio">Cat</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="otherPetRadio" formControlName="pet" value="other">
+        <label class="form-check-label" for="otherPetRadio">Other</label>
+      </div>
+      
+      <div *ngIf="deserveError('pet')" class="alert alert-danger">
+        <div *ngIf="pet.errors.required">
+          Pet is required.
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section formGroupName="address">
+    <h2>Address:</h2>
+
+    <div class="form-group">
+
+      <label>
+        <span>City: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="text" formControlName="city" required/>
+      </label>
+
+      <div *ngIf="deserveError('address.city')" class="alert alert-danger">
+        <div *ngIf="city.errors.required">
+          City is required.
+        </div>
+      </div>
+      
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Street: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="text" formControlName="street" required/>
+      </label>
+
+      <div *ngIf="deserveError('address.street')" class="alert alert-danger">
+        <div *ngIf="street.errors.required">
+          Street is required.
+        </div>
+      </div>
+      
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Building: <strong><abbr title="required">*</abbr></strong></span>
+        <input class="form-control" type="text" formControlName="building" required/>
+      </label>
+
+      <div *ngIf="deserveError('address.building')" class="alert alert-danger">
+        <div *ngIf="building.errors.required">
+          Building is required.
+        </div>
+      </div>
+      
+    </div>
+    <div class="form-group">
+
+      <label>
+        <span>Flat No:</span>
+        <input class="form-control" type="text" formControlName="flatNo"/>
+      </label>
+      
+    </div>
+  </section>
+  <section formGroupName="consents">
+    <h2>Consents:</h2>
+
+    <div class="form-group">
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="newsletterCheck" formControlName="newsletter" required/>
+        <label class="form-check-label" for="newsletterCheck">Newsletter <strong><abbr title="required">*</abbr></strong></label>
+      </div>
+
+      <div *ngIf="deserveError('consents.newsletter')" class="alert alert-danger">
+        <div *ngIf="newsletter.errors.required">
+          Your consent to our newsletter is required.
+        </div>
+      </div>
+
+      <div class="form-check" *ngIf="registerForm.get('phone').value && registerForm.get('phone').valid">
+        <input class="form-check-input" type="checkbox" id="smsCheck" formControlName="sms"/>
+        <label class="form-check-label" for="smsCheck">SMS</label>
+      </div>
+
+    </div>
+  </section>
+
+  <p>
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
+  </p>
+
+</form>
+</div>
